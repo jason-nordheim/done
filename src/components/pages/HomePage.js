@@ -1,3 +1,10 @@
+import { Layout } from "../layout/Layout";
+import { RegisterForm } from "../forms/RegisterForm";
+
 export function HomePage() {
-  return <div className="HomePage"></div>;
+  return (
+    <Layout>
+      <RegisterForm />
+    </Layout>
+  );
 }
