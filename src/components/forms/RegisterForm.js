@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { registerRequest } from "../../context/AuthActions";
 import "./RegisterForm.css";
-import { Redirect } from "react-router";
 
 export function RegisterForm() {
   const { state, dispatch } = useContext(AuthContext);
