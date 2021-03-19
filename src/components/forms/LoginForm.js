@@ -47,6 +47,9 @@ export function LoginForm() {
     !state.token && (
       <form onSubmit={handleSubmit}>
         <div>
+          <h2>Login</h2>
+        </div>
+        <div>
           <label htmlFor="email">Email</label>
           <input
             required
