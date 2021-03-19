@@ -44,7 +44,7 @@ export function LoginForm() {
   console.log(state);
   const { email, password } = user;
   return !state.token ? (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="shadow">
       <div>
         <label htmlFor="email">Email</label>
         <input

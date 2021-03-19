@@ -30,7 +30,7 @@ export function RegisterForm() {
 
   const { first_name, last_name, email, password } = user;
   return !state.token ? (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="shadow">
       <div>
         <label htmlFor="first_name">First Name</label>
         <input
