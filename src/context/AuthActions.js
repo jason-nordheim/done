@@ -1,6 +1,5 @@
-import { Login } from "../services/AuthService";
+import { Login, Register } from "../services/AuthService";
 import { AUTH_CONSTANTS } from "./AuthConstants";
-
 const {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -13,39 +12,44 @@ const {
   LOGOUT_FAILURE,
 } = AUTH_CONSTANTS;
 
-async function loginRequest(user, dispatch) {
+function loginRequest(user, dispatch) {
   Login(user)
-    .then((token) => {
-      console.log("LR_TOKEN", token);
+    .then((data) => {
+      dispatch(loginSuccess(data.token));
     })
     .catch((error) => {
-      console.error("LR_ERROR", error);
+      // todo: dispatch additional actions depending results from authService
+      dispatch(loginFailure("Invalid Credentials"));
     });
-  // todo: dispatch additional actions depending results from authService
   return { type: LOGIN_REQUEST, payload: null };
 }
-async function loginFailure(error) {
+function loginFailure(error) {
   return { type: LOGIN_FAILURE, payload: error };
 }
-async function loginSuccess() {
-  return { type: LOGIN_SUCCESS, payload: null };
+function loginSuccess(token) {
+  return { type: LOGIN_SUCCESS, payload: token };
 }
-async function registerRequest() {
+function registerRequest(user, dispatch) {
+  Register(user)
+    .then((data) => {
+      console.log("success", data);
+    })
+    .catch((error) => console.log("error", error));
   return { type: REGISTER_REQUEST, payload: null };
 }
-async function registerSuccess() {
+function registerSuccess() {
   return { type: REGISTER_SUCCESS, payload: null };
 }
-async function registerFailure() {
+function registerFailure() {
   return { type: REGISTER_FAILURE, payload: null };
 }
-async function logoutRequest() {
+function logoutRequest() {
   return { type: LOGOUT_REQUEST, payload: null };
 }
-async function logoutSuccess() {
+function logoutSuccess() {
   return { type: LOGOUT_SUCCESS, payload: null };
 }
-async function logoutFailure() {
+function logoutFailure() {
   return { type: LOGOUT_FAILURE, payload: null };
 }
 export {

@@ -19,6 +19,7 @@ export const initAuthState = {
   error: undefined,
 };
 export const authReducer = (state, action) => {
+  console.log("action", action);
   switch (action.type) {
     case LOGIN_REQUEST:
       return {

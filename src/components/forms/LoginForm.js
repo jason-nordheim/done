@@ -5,7 +5,6 @@ import "./LoginForm.css";
 
 export function LoginForm() {
   const { state, dispatch } = useContext(AuthContext);
-  const [error, setError] = useState("");
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -13,16 +12,10 @@ export function LoginForm() {
 
   const validUser = () => user.email && user.password;
 
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => setError(null), 2000);
-    }
-  }, [error]);
-
   async function handleSubmit(event) {
     event.preventDefault();
     if (validUser()) {
-      dispatch(loginRequest(user), dispatch);
+      dispatch(loginRequest(user, dispatch));
       //   try {
       //     const res = await fetch("http://localhost:5000/api/login", {
       //       method: "POST",
@@ -48,8 +41,9 @@ export function LoginForm() {
     setUser({ ...user, [name]: value });
   }
 
+  console.log(state);
   const { email, password } = user;
-  return (
+  return !state.token ? (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email</label>
@@ -81,7 +75,9 @@ export function LoginForm() {
           disabled={!validUser()}
         />
       </div>
-      {error && <span className="error">{error}</span>}
+      {state.error && <span className="error">{state.error}</span>}
     </form>
+  ) : (
+    <h3>All logged In!</h3>
   );
 }
