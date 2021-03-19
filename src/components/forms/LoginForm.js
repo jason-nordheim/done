@@ -74,7 +74,7 @@ export function LoginForm() {
         <div>
           <input
             type="submit"
-            value="Login"
+            value="Submit"
             onClick={handleSubmit}
             disabled={!validUser()}
           />
