@@ -33,6 +33,9 @@ export function RegisterForm() {
     !state.token && (
       <form onSubmit={handleSubmit}>
         <div>
+          <h2>Register</h2>
+        </div>
+        <div>
           <label htmlFor="first_name">First Name</label>
           <input
             type="text"
@@ -77,7 +80,7 @@ export function RegisterForm() {
         <div>
           <input
             type="submit"
-            value="Register"
+            value="Submit"
             onClick={handleSubmit}
             disabled={!validUser()}
           />
