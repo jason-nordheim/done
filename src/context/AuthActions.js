@@ -32,16 +32,20 @@ function loginSuccess(token) {
 function registerRequest(user, dispatch) {
   Register(user)
     .then((data) => {
-      console.log("success", data);
+      console.log("RR", data);
+      dispatch(loginRequest(user, dispatch));
     })
-    .catch((error) => console.log("error", error));
+    .catch((error) => {
+      console.log("RF", error);
+      dispatch(registerFailure(error.message));
+    });
   return { type: REGISTER_REQUEST, payload: null };
 }
 function registerSuccess() {
   return { type: REGISTER_SUCCESS, payload: null };
 }
-function registerFailure() {
-  return { type: REGISTER_FAILURE, payload: null };
+function registerFailure(error) {
+  return { type: REGISTER_FAILURE, payload: error };
 }
 function logoutRequest() {
   return { type: LOGOUT_REQUEST, payload: null };

@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { registerRequest } from "../../context/AuthActions";
 import "./RegisterForm.css";
 
 export function RegisterForm() {
-  const [error, setError] = useState("");
+  const { state, dispatch } = useContext(AuthContext);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -14,31 +16,10 @@ export function RegisterForm() {
     return user.email && user.password && user.first_name && user.last_name;
   }
 
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => setError(null), 2000);
-    }
-  }, [error]);
-
   async function handleSubmit(event) {
     event.preventDefault();
     if (validUser()) {
-      try {
-        console.log(user);
-        const res = await fetch("http://localhost:5000/api/users", {
-          method: "POST",
-          body: JSON.stringify({ ...user }),
-          headers: { "Content-Type": "application/json" },
-          mode: "cors",
-        });
-        const data = await res.json();
-        if (data.error) {
-          console.log(data["error"]);
-          setError(data["error"]);
-        } else {
-          console.log(data);
-        }
-      } catch (error) {}
+      dispatch(registerRequest(user, dispatch));
     }
   }
 
@@ -48,7 +29,7 @@ export function RegisterForm() {
   }
 
   const { first_name, last_name, email, password } = user;
-  return (
+  return !state.token ? (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="first_name">First Name</label>
@@ -100,7 +81,9 @@ export function RegisterForm() {
           disabled={!validUser()}
         />
       </div>
-      {error && <span className="error">{error}</span>}
+      {state.error && <span className="error">{state.error}</span>}
     </form>
+  ) : (
+    <h1>Already Logged In</h1>
   );
 }
