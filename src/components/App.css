@@ -24,7 +24,7 @@ Global Styles
   --font-fam-alt: "Marvel", sans-serif;
   --font-fam-headers: "Cabin", sans-serif;
   --font-fam-primary: "Source Sans Pro", sans-serif;
-  --color-bg: #0f0e17;
+  --color-bg: #0a090eb9;
   --color-txt-headline: #fffffe;
   --color-txt-paragraph: #a7a9be;
   --color-btn-bg: #ff8906;
@@ -47,9 +47,17 @@ html {
   color: var(--color-txt-paragraph);
 }
 
+div#root nav {
+  display: grid;
+}
+div#root nav a {
+  text-decoration: none;
+}
+
 /** main page content **/
 div#root main {
   display: flex;
+  flex-direction: column;
   place-content: center;
   font-family: var(--font-fam-primary);
 }
@@ -74,7 +82,7 @@ div#root main h5.alt {
 }
 
 /** generic form styling **/
-form {
+.card {
   background-color: var(--color-card-bg);
   padding: 15px 15px;
   margin: 15px 15px;
@@ -105,10 +113,11 @@ input[type="submit"] {
 /** helper classes **/
 
 .shadow {
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    0 100px 80px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 1.6px rgba(0, 0, 0, 0.15),
+    0 4.5px 3.6px rgba(0, 0, 0, 0.114), 0 7.9px 6.3px rgba(0, 0, 0, 0.098),
+    0 12.5px 10px rgba(0, 0, 0, 0.086), 0 19.3px 15.5px rgba(0, 0, 0, 0.075),
+    0 30.1px 24.1px rgba(0, 0, 0, 0.064), 0 50px 40px rgba(0, 0, 0, 0.052),
+    0 100px 80px rgba(0, 0, 0, 0.036);
 }
 
 /** tablet styles **/
